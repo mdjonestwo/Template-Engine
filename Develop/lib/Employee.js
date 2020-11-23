@@ -23,8 +23,8 @@ class Employee {
     }
 }
 
-const employee  = new Employee('Jones',' Engineer', "jones@jones.com");
-console.log(employee);
+const employee  = new Employee();
+
 
 
 module.exports = Employee;
