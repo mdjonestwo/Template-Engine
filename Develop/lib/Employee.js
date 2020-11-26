@@ -4,25 +4,28 @@ class Employee {
         this.name = name
         this.id = id
         this.email = email
-    }
-
-    getName() {
-        console.log(`Name: ${this.name}`)
-    }
-
-    getID(){
-        console.log(`ID: ${this.id}`)
-    }
-   
-    getEmail(){
-        console.log(`Email: ${this.email}`)
-    }
-
-    getRole(){
-        console.log(this)
+        Employee.prototype.getName = function () {
+            console.log(`Name: ${this.name}`)
+        }
+    
+        Employee.prototype.getID = function () {
+            console.log(`ID: ${this.id}`)
+        }
+       
+        Employee.prototype.getEmail = function () {
+            console.log(`Email: ${this.email}`)
+        }
+    
+        Employee.prototype.getRole = function () {
+            console.log(this)
+        }
     }
 }
 
+ 
+
+
+const john = new Employee("john", "id", "email")
 
 
 
