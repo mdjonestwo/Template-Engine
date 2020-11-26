@@ -3,12 +3,12 @@ const Employee = require("./Employee");
 
 class Engineer extends Employee {
     constructor(gitHub){
-        super("John", "Engineer", "john@john.com")        
+        super()        
         this.gitHub = gitHub; 
     }
 
 }
 
-const john = new Engineer("github.com/john")
 
-console.log(john)
+
+module.exports = Engineer
