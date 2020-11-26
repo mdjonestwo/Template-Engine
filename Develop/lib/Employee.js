@@ -23,7 +23,6 @@ class Employee {
     }
 }
 
-const employee  = new Employee();
 
 
 

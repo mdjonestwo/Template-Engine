@@ -35,17 +35,17 @@ inquirer
         {
             type: "input",
             name: "name",
-            message: "What is your name?"
+            message: "What is your name?",
         },
         {
             type: "input",
             name: "email",
-            message: "What is your email?"
+            message: "What is your email?",
         },
         {
             type: "input",
             name: "id",
-            message: "What is your ID?"
+            message: "What is your ID?",
         },
         {
             type: "input",
@@ -65,11 +65,10 @@ inquirer
             message: "What school did you go to?",
             when: (answers) => answers.intern === true,
 
-        }
-        
-    
+        }    
     ])
-    .then(answers => {
+    
+    .then((answers) => {
         if(answers.engineer === true){
             const engineer = new Engineer(answers.name, answers.id, answers.email, answers.github)
             console.log(engineer)
@@ -79,7 +78,7 @@ inquirer
         } else {
             const intern = new Intern(answers.name, answers.id, answers.email, answers.school)
             console.log(intern)
-        } 
+        }
     })
 
 // After the user has input all employees desired, call the `render` function (required
