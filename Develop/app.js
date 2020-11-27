@@ -10,76 +10,127 @@ const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./lib/htmlRenderer");
 
-
 // Write code to use inquirer to gather information about the development team members,
 // and to create objects for each team member (using the correct classes as blueprints!)
-inquirer 
-    .prompt([
-        {
-            type: "confirm",
-            name: "engineer",
-            message: "Are you an Engineer?",
-        },
-        {
-            type: "confirm",
-            name: "manager",
-            message: "Are you a manager?",
-            when: (answers) => answers.engineer === false
-        },
-        {
-            type: "confirm", 
-            name: "intern",
-            message: "Are you an intern?",
-            when: (answers) => answers.manager === false,            
-        },
-        {
-            type: "input",
-            name: "name",
-            message: "What is your name?",
-        },
-        {
-            type: "input",
-            name: "email",
-            message: "What is your email?",
-        },
-        {
-            type: "input",
-            name: "id",
-            message: "What is your ID?",
-        },
-        {
-            type: "input",
-            name: "github",
-            message: "What is you GitHub username?",
-            when: (answers) => answers.engineer === true,
-        },
-        {
-            type: "input",
-            name: "phoneNumber",
-            message: "What is your office number?",
-            when: (answers) => answers.manager === true,
-        },
-        {   
-            type: "input",
-            name: "school",
-            message: "What school did you go to?",
-            when: (answers) => answers.intern === true,
+const employeesInfo = []
 
-        }    
+const employeeInfo = function () {
+  inquirer
+    .prompt([
+      {
+        type: "confirm",
+        name: "engineer",
+        message: "Are you an Engineer?",
+      },
+      {
+        type: "confirm",
+        name: "manager",
+        message: "Are you a manager?",
+        when: (answers) => answers.engineer === false,
+      },
+      {
+        type: "confirm",
+        name: "intern",
+        message: "Are you an intern?",
+        when: (answers) => answers.manager === false,
+      },
+      {
+        type: "input",
+        name: "name",
+        message: "What is your name?",
+      },
+      {
+        type: "input",
+        name: "email",
+        message: "What is your email?",
+      },
+      {
+        type: "input",
+        name: "id",
+        message: "What is your ID?",
+      },
+      {
+        type: "input",
+        name: "github",
+        message: "What is you GitHub username?",
+        when: (answers) => answers.engineer === true,
+      },
+      {
+        type: "input",
+        name: "phoneNumber",
+        message: "What is your office number?",
+        when: (answers) => answers.manager === true,
+      },
+      {
+        type: "input",
+        name: "school",
+        message: "What school did you go to?",
+        when: (answers) => answers.intern === true,
+      },
     ])
-    
+
     .then((answers) => {
-        if(answers.engineer === true){
-            const engineer = new Engineer(answers.name, answers.id, answers.email, answers.github)
-            console.log(engineer)
-        } else if(answers.manager === true){
-            const manager = new Manager(answers.name, answers.id, answers.email, answers.phoneNumber)
-            console.log(manager)
-        } else {
-            const intern = new Intern(answers.name, answers.id, answers.email, answers.school)
-            console.log(intern)
-        }
-    })
+      if (answers.engineer === true) {
+        const engineer = new Engineer(
+          answers.name,
+          answers.id,
+          answers.email,
+          answers.github
+        );
+        console.log(engineer);
+      } else if (answers.manager === true) {
+        const manager = new Manager(
+          answers.name,
+          answers.id,
+          answers.email,
+          answers.phoneNumber
+        );
+        console.log(manager);
+      } else {
+        const intern = new Intern(
+          answers.name,
+          answers.id,
+          answers.email,
+          answers.school
+        );
+        console.log(intern);
+      }
+      addEmployee()
+    });
+};
+
+// code below provided by https://github.com/BwayCarl
+
+const addEmployee = () => {
+  inquirer
+    .prompt([
+      {
+        type: "confirm",
+        name: "addAnother",
+        message: "Would you like to add another employee?",
+      },
+    ])
+
+    .then((answer) => {
+      if (answer.addAnother === true) {
+        employeeInfo();
+      } else {
+        const html = render(employeesInfo);
+        writeHTMLtoFile(html);
+      }
+    });
+};
+
+const writeHTMLtoFile = (html) => {
+  fs.writeFile(outputPath, html, function (err) {
+    if (err) {
+      return console.log(err);
+    }
+    console.log("Your team HTML file is complete.");
+  });
+};
+
+employeeInfo();
 
 // After the user has input all employees desired, call the `render` function (required
 // above) and pass in an array containing all employee objects; the `render` function will

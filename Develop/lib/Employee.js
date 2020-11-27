@@ -5,22 +5,27 @@ class Employee {
         this.id = id
         this.email = email
         Employee.prototype.getName = function () {
-            console.log(`Name: ${this.name}`)
+            return this.name
         }
     
-        Employee.prototype.getID = function () {
-            console.log(`ID: ${this.id}`)
+        Employee.prototype.getId = function () {
+            return this.id
         }
        
         Employee.prototype.getEmail = function () {
-            console.log(`Email: ${this.email}`)
-        }
-    
-        Employee.prototype.getRole = function () {
-            console.log(this)
-        }
+            return this.email            
+        }     
+        Employee.prototype.getRole = function (a){
+           return this.constructor.name
+        }  
     }
+
 }
+
+    
+  
+    
+
 
  
 
@@ -28,5 +33,5 @@ class Employee {
 const john = new Employee("john", "id", "email")
 
 
-
+//john.getRole()
 module.exports = Employee;
