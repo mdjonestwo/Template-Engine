@@ -78,6 +78,7 @@ const employeeInfo = function () {
           answers.github
         );
         console.log(engineer);
+        employeesInfo.push(engineer)
       } else if (answers.manager === true) {
         const manager = new Manager(
           answers.name,
