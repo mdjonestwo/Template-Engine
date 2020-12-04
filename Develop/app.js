@@ -87,6 +87,7 @@ const employeeInfo = function () {
           answers.phoneNumber
         );
         console.log(manager);
+        employeesInfo.push(manager)
       } else {
         const intern = new Intern(
           answers.name,
@@ -95,6 +96,7 @@ const employeeInfo = function () {
           answers.school
         );
         console.log(intern);
+        employeesInfo.push(intern)
       }
       addEmployee()
     });
